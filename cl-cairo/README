@@ -1,0 +1,70 @@
+;;;; http://nostdal.org/cl-cairo/ ;;;;
+
+
+cl-cairo requirements
+;;;;;;;;;;;;;;;;;;;;;
+
+* cffi ( http://common-lisp.net/project/cffi/ )
+* cairo >= 1.0 ( http://cairographics.org/ )
+
+cl-cairo has currently only been tested with SBCL-0.9.5 and cairo-1.0 
+under Linux as of this writing.
+
+
+
+Installation/usage 
+;;;;;;;;;;;;;;;;;;
+
+Edit the lines between `NON-PORTABLE CODE STARTS' and `NON-PORTABLE CODE ENDS' 
+to suit your setup.
+
+
+
+Notable differences in naming
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+* set/get
+  Instead of using names like `get-source' and `set-source', I use the
+  shorter name `source' for the getter and `(setf source ..)' for the setter.
+
+
+(TODO: mention naming of enums here)
+
+
+
+Numeric literals
+;;;;;;;;;;;;;;;;
+
+When specifying numeric literals, remember that cl-cairo (and cairo) requires
+that they are of type `double-float'. Like this, for the numbers 1 and 1.5:
+
+1d0 
+1.5d0
+
+
+
+Return values
+;;;;;;;;;;;;;
+
+Take for instance:
+
+void cairo_user_to_device(cairo_t *cr, double *x, double *y);
+
+This is a function that reads (input) the value of `x' and `y', 
+then destructively change their values to represent output. This is not good 
+Lisp-style, so instead cl-cairo leaves the variables as they are and return 
+two new values instead.
+
+Use something like this if you want a "C'ish" behaviour:
+
+(multiple-value-bind (nx ny) (cairo:user-to-device x y)
+  (setf x nx)
+  (setf y ny))
+
+antifuchs and moore33 on #lisp suggested using `(setf (values foo bar) (baz))' or
+`multiple-value-setq'.
+
+(If this is a problem when porting code for instance(?), we could add new functions
+with names like `cairo:user-to-device!'.)
+
+TODO: Add note about `fill-extents'.

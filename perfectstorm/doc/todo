@@ -1,0 +1,30 @@
+TODOs
+
+* generell: gui-system ausdenken
+* gui debugging: unit-stats/ziel/befehl/etc
+* befehle fuer gruppen ausser destination
+* rockets abschiessen
+* air/ground weapons
+* sound?
+* ordentlich features (insbes. shader) checken und schoene fehlermeldungen dazu
+* cl-cairo2 einbauen
+
+(* heap / priority-queue package)
+
+BUGS
+
+* absturz, wenn gruppenleiter aus gruppe entfernt wird
+* mouse-cursor lässt sich nicht verstecken und darum auch nicht cool ein eigener benutzen
+* grafik auf hubba?
+* einheiten laufen aus grid
+
+TEH GRAPHICS REFACTORING
+
+anforderungen:
+* dinge nach sorte zusammengruppieren und am stueck zeichnen
+* dinge composite-maessig zeichnen, die sich gemeinsam drehen, verschieben, strecken
+  * muss angeben koennen ob kinder sich auch strecken?
+    z.b. glows,caps am ende von laserstrahl
+  * kinder muessen auch ueber namen erreichbar sein
+* dinge in der engine haben aequivalent (entity) im spiel.
+  * darueber nachdenken

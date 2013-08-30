@@ -1,0 +1,22 @@
+;;;; http://nostdal.org/cl-cairo/
+
+
+;; TODO
+;;;;;;;
+
+* This section is not ported yet: http://www.cairographics.org/manual/cairo-FreeType-Fonts.html
+
+* This section is not ported yet: http://www.cairographics.org/manual/cairo-Win32-Fonts.html (but who cares? .. :P)
+
+* Search for the string TODO in the *.lisp-files. :)
+
+* Add a with-macros for context and create/destroy-pairs of functions.
+  Maybe some reference-counting stuff? I'm not sure.
+
+* Maybe a higher-level toolkit, that uses CLOS. This should be in SWCairo I think.
+
+* Make the coercelet-thing optional. Or is it really needed at all? => Naw, I've removed it.
+
+* Exception-handling, instead of return-values. I think. I guess this should be in SWCairo.
+
+
