@@ -39,12 +39,3 @@
 		      :open-to-left ,open-to-left
 		      :right-bound ,right-bound
 		      :open-to-right ,open-to-right))))
-
-(defun get-surface-data-as-array (surface bytes-per-pixel)
-  (let* ((width (cairo:image-surface-get-width surface))
-         (height (cairo:image-surface-get-height surface))
-         (buffer (make-array (* width height bytes-per-pixel) :element-type '(unsigned-byte 8) :fill-pointer 0))
-         (data (cairo:image-surface-get-data surface)))
-    (loop for i from 0 below (* width height bytes-per-pixel) do
-         (vector-push-extend (cffi:mem-ref data :uint8 i) buffer))
-    buffer))
