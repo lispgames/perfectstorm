@@ -74,7 +74,7 @@
                                         ;(declare (optimize
                                         ;(speed 3) (safety 0)
                                         ;(debug 0) (space 0)))
-       (let* ((,surface-symbol (cairo:image-surface-create :argb32 width height))
+       (let* ((,surface-symbol (cairo:create-image-surface :argb32 width height))
               (width (coerce width 'double-float))
               (height (coerce height 'double-float))
               (cairo:*context* (cairo:create-context ,surface-symbol)) ; set cairo default surface
