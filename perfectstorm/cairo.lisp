@@ -210,7 +210,7 @@
       (cairo:rectangle  0.0d0  0.0d0 (- width 0) height)
       (cairo:set-source weapon-gradient)
 
-      (cairo:fill)))
+      (cairo:fill-path)))
 
 (def-texture-method ground-unit
     (with-gradient (ground-unit-gradient :radial ((/ width 2) (/ height 2)
@@ -226,7 +226,7 @@
       (cairo:rectangle  0.0d0  0.0d0 (- width 0) height)
       (cairo:set-source ground-unit-gradient)
 
-      (cairo:fill)))
+      (cairo:fill-path)))
 
 
 (def-texture-method air-unit
@@ -250,7 +250,7 @@
 
         (cairo:set-source ground-unit-gradient)
 
-        (cairo:fill))
+        (cairo:fill-path))
 
       (cairo:translate 0.0d0 (* height  -0.5)); (/ exhaust-scale))))
       (cairo:scale (/ 1.0d0) (/ exhaust-scale)))
@@ -268,7 +268,7 @@
 
     (relative-path width height cairo:*context* path)
     (set-source-color (mix-colors '(0 0 0 0.5 0.5) color))
-    (cairo:fill)
+    (cairo:fill-path)
     (relative-path width height cairo:*context* path)
     (set-source-color color)
     (cairo:stroke)))
@@ -286,7 +286,7 @@
       (cairo:rectangle  0.0d0  0.0d0 (- width 0) height)
       (cairo:set-source bullet-gradient)
 
-      (cairo:fill)))
+      (cairo:fill-path)))
 
 
 (def-texture-method explosion
@@ -304,7 +304,7 @@
       (cairo:rectangle  0.0d0  0.0d0 (- width 0) height)
       (cairo:set-source explosion-gradient)
 
-      (cairo:fill)))
+      (cairo:fill-path)))
 
 
 
@@ -325,7 +325,7 @@
       (cairo:rectangle  0.0d0  0.0d0 width height)
       (cairo:set-source beam-gradient)
 
-      (cairo:fill)))
+      (cairo:fill-path)))
 
 (def-texture-method laser-beam-cap
     (with-gradient (beam-gradient :radial ((/ width 2) (/ height 2)
@@ -335,10 +335,10 @@
                                   *beam-gradient-table*)
       (cairo:rectangle  0.0d0  0.0d0 width height)
       (cairo:set-source beam-gradient)
-      (cairo:fill)
+      (cairo:fill-path)
       (cairo:rectangle  0.0d0  0.0d0 (/ width 2) height)
       (set-source-color '(0 0 0 1))
-      (cairo:fill)))
+      (cairo:fill-path)))
 
 
 (def-texture-method visible-line
@@ -350,7 +350,7 @@
       (cairo:rectangle  0.0d0  0.0d0 (- width 0) height)
       (cairo:set-source line-gradient)
 
-      (cairo:fill)))
+      (cairo:fill-path)))
 
 (def-texture-method glow
     (with-gradient (glow-gradient :radial ((/ width 2) (/ height 2)
@@ -365,7 +365,7 @@
       (cairo:rectangle  0.0d0  0.0d0 (- width 0) height)
       (cairo:set-source glow-gradient)
 
-      (cairo:fill)))
+      (cairo:fill-path)))
 
 
 (def-texture-method selection-indicator
@@ -382,7 +382,7 @@
       (cairo:rectangle  0.0d0  0.0d0 (- width 0) height)
       (cairo:set-source gradient)
 
-      (cairo:fill)))
+      (cairo:fill-path)))
 
 (def-texture-method rocket
     (let ((exhaust-scale 0.5d0))
@@ -405,7 +405,7 @@
 
         (cairo:set-source ground-unit-gradient)
 
-        (cairo:fill))
+        (cairo:fill-path))
 
       (cairo:translate 0.0d0 (* height  -0.5)); (/ exhaust-scale))))
       (cairo:scale (/ 1.0d0) (/ exhaust-scale)))
@@ -421,7 +421,7 @@
 
     (relative-path width height cairo:*context* path)
     (set-source-color (mix-colors '(0 0 0 0 1) color))
-    (cairo:fill)
+    (cairo:fill-path)
     (relative-path width height cairo:*context* path)
     (set-source-color color)
     (cairo:stroke)))
@@ -434,7 +434,7 @@
                    (1 0.7)
                    (1 0.3))
                  :border *relative-line-width*)
-  (cairo:fill))
+  (cairo:fill-path))
 
 (def-texture-method empty-health-element
     (set-source-color '(1 0 0 1))
@@ -444,7 +444,7 @@
                    (1 0.7)
                    (1 0.3))
                  :border *relative-line-width*)
-  (cairo:fill))
+  (cairo:fill-path))
 
 
 
@@ -460,7 +460,7 @@
 
       (relative-path width height cairo:*context* path)
       (set-source-color (mix-colors '(0 0 0 0.5 0.5) color))
-      (cairo:fill)
+      (cairo:fill-path)
       (relative-path width height cairo:*context* path)
       (set-source-color color)
       (cairo:stroke)))
@@ -476,7 +476,7 @@
                      (0 1))))
       (relative-path width height cairo:*context* path :border *relative-line-width*)
       (set-source-color (mix-colors '(0 0 0 0.5 0.5) color))
-      (cairo:fill)
+      (cairo:fill-path)
 
       (set-source-color color)
 
