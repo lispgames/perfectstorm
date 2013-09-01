@@ -52,7 +52,7 @@
          (gl:bind-texture :texture-2d texture-name)
          (gl:tex-image-2d :texture-2d 0
                           :rgba width height 0 :bgra :unsigned-byte
-                          (cairo:surface-get-data-as-array surface 4))
+                          (get-surface-data-as-array surface 4))
 
          (gl:tex-parameter :texture-2d :texture-min-filter :linear)
          (gl:tex-parameter :texture-2d :texture-mag-filter :linear)
@@ -83,7 +83,7 @@
          (cairo:set-line-width line-width)
          ,@(numbers-to-doubles body)
          (gl:bind-texture :texture-2d ,texture-name-symbol)
-         (let ((,data-symbol (cairo:surface-get-data-as-array ,surface-symbol 4)))
+         (let ((,data-symbol (get-surface-data-as-array ,surface-symbol 4)))
            (gl:tex-image-2d :texture-2d 0
                             :rgba width height 0 :bgra :unsigned-byte
                             ,data-symbol)
