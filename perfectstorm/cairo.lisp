@@ -58,7 +58,7 @@
          (gl:tex-parameter :texture-2d :texture-mag-filter :linear)
          (setf (aref *char-textures* char-code) texture-name)
 
-         (cairo:surface-destroy surface))))
+         (cairo:destroy surface))))
 
 
 
@@ -98,7 +98,7 @@
            (gl:tex-parameter :texture-2d :texture-wrap-s :repeat)
            (gl:tex-parameter :texture-2d :texture-wrap-t :repeat))
 
-         (cairo:surface-destroy ,surface-symbol)
+         (cairo:destroy ,surface-symbol)
          ,texture-name-symbol))))
 
 
