@@ -1,5 +1,3 @@
-;;;; -*- Mode: Lisp; Syntax: ANSI-Common-Lisp; Base: 10 -*-
-
 (defpackage :storm-asd
   (:use :cl :asdf))
 
@@ -7,9 +5,15 @@
 
 (defsystem perfectstorm
   :name "perfectstorm"
-  :depends-on (cl-opengl cl-glut cl-glu cl-cairo infpre metabang-bind toolbox vektor)
-  :components (
-               (:file "package")
+  :depends-on (cl-opengl
+               cl-glut
+               cl-glu
+               cl-cairo2
+               infix
+               metabang-bind
+               toolbox
+               vektor)
+  :components ((:file "package")
                (:file "util" :depends-on ("package"))
 	       (:file "heap" :depends-on ("package"))
                (:file "main" :depends-on ("geometry" "opengl" "cairo" "gui" "entities-impl" "package" "util" "units" "pathfinding" "quadtree"))
