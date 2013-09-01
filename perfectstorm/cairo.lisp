@@ -130,8 +130,8 @@
               collecting `(double ,definition))))
       `(let ((,gradient-name
               (,(case type
-                      (:radial 'cairo:pattern-create-radial)
-                      (:linear 'cairo:pattern-create-linear))
+                      (:radial 'cairo:create-radial-pattern)
+                      (:linear 'cairo:create-linear-pattern))
                 ,@new-anchor-definitions)))
          (mapcar (lambda (base-color)
                    (destructuring-bind (,offset-name ,r-name ,g-name ,b-name ,a-name) (cons (first base-color)
