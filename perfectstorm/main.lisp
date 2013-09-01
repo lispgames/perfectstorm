@@ -64,8 +64,8 @@
   ()
   (:default-initargs
    :pos-x 100 :pos-y 100 :width 1000 :height 800
-   
-   :mode '(:double :rgb) :title "woohooo \\o/"))
+
+   :mode '(:double :rgb) :title "Perfectstorm - The Revival"))
 
 (defmethod glut:display-window :after ((w storm-window))
   (gl:clear-color 0 0 0 1)
@@ -103,7 +103,7 @@
   (setf *aspect-ratio* (/ width height)
 	*viewport-size* (make-point width height))
   (set-projection))
-  
+
 
 (defmethod glut:display ((w storm-window))
  ; (format t ".")
@@ -122,7 +122,7 @@
     (incf *fps-counter*))
   (glut:swap-buffers))
 
-  
+
 (defmethod glut:idle ((w storm-window))
                                         ;(gl:use-program *program*)
                                         ;TODO
@@ -133,7 +133,7 @@
                                         ;   (gl:use-program shader)
                                         ;   (gl:uniformi (gl:get-uniform-location shader "TIME_FROM_INIT") *gl-ticks*)
                                         ;   (gl:use-program *current-shader*))
-  
+
 
   (when (not *textures-done*)
     (generate-textures)
@@ -142,7 +142,7 @@
     (init)
     (setf *init-done* t))
 
-  
+
   (let ((now (get-internal-real-time)))
     (when (> now
              (+ *last-idle*
@@ -172,7 +172,7 @@
                                         ;         (format nil "FPS: ~a" fps-counter))
                                         ;   (setf fps-counter 0)
                                         ;   (setf last-fps-time now)))
-      
+
         (if (= (length *selected-entities*) 1)
             (setf (text *info-display*) (format nil "~a" (first *selected-entities*)))))
       (setf *fps-average*
@@ -182,8 +182,8 @@
                *fps-counter*))
       (setf *fps-counter* 0)
       (setf *last-fps-time* now)
-      
-      
+
+
       (glut:post-redisplay))))
 
 (defparameter *before-cursor* "")
@@ -248,12 +248,12 @@
   (setf (cursor-pos *console*)
         (- (length (text *console*)) (length *after-cursor*) 1))
   (text *console*))
-                                      
+
 
 (defun update-console ()
     (loop while (> (number-of-newlines (update-console-text)) *max-buffer*)
       do (setf *console-buffer* (butlast *console-buffer*))))
-      
+
 (defun cursor-left ()
   (setf *after-cursor* (concatenate 'string (bounded-subseq *before-cursor* (- (length *before-cursor*) 1)) *after-cursor*)
         *before-cursor* (bounded-subseq *before-cursor* 0 (- (length *before-cursor*) 1)))
@@ -314,7 +314,7 @@
 
 (defmethod glut:special ((w storm-window) key x y)
    (handle-key key x y))
-  
+
 
 (defmethod glut:keyboard ((w storm-window) key x y)
   (handle-key key x y))
@@ -365,8 +365,8 @@
                                     :owner *gui-owner*
                                     :units (copy-seq *selected-entities*))
                       pos)))
-                                    
-    
+
+
 
 
 (defun selection-box (start end)
@@ -420,14 +420,14 @@
                                    (make-point (x drag-end) (y *drag-start*)))
                              :scale-elements (/ *zoom* 100))
               nil))))
-                                                 
+
 
 (defun initialize-state ()
   (setf *units* ()
         *ground-units* ()
         *entities* ()
         *independent-entities* ()
-        *moving-entities* () 
+        *moving-entities* ()
         *thinking-entities* ()
         *buildings* ()
         *gui-things* ()
@@ -490,9 +490,9 @@
     ;(make-instance 'universal-factory :pos (make-point -100 0) :owner cupe :queue '(killbox) :loop-queue-p t :rallying-point (make-point 40 40))))
 
 (defun create-terrain-1 ()
-  (make-instance 
+  (make-instance
    'terrain
-   :obstacles (list 
+   :obstacles (list
 	       (make-instance 'obstacle
 			      :margin (make-instance 'polygon :corners (list (make-point 50 30)
 									     (make-point 30 50)
@@ -529,7 +529,7 @@
   (push *quadtree* *gui-things*)
  ; (push (cursor *gui-owner*) *gui-things*) ;disabling the default cursor does not work yet (-> memory faults)
   (glut:display-window (make-instance 'storm-window)))
-  
+
 
 (defun init () ; gets called once, when glut:idle is called the first time
   (setf *desired-zoom* 200))
