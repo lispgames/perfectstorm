@@ -29,10 +29,10 @@
 
 (defun make-chars (width height color)
   (loop for char-code from 32 to 126 do
-       (let* ((surface (cairo:image-surface-create :argb32 width height))
+       (let* ((surface (cairo:create-image-surface :argb32 width height))
               (width (coerce width 'double-float))
               (height (coerce height 'double-float))
-              (cairo:*context* (cairo:create surface)) ; set
+              (cairo:*context* (cairo:create-context surface)) ; set
                                         ; cairo default surface
               (texture-name (first (gl:gen-textures 1))) ;create new opengl texture "name" (i.e. get an unused texture id)
               (line-width (* (min width height) *relative-line-width*))) ;some arbitray line width that scales with the image
@@ -77,7 +77,7 @@
        (let* ((,surface-symbol (cairo:image-surface-create :argb32 width height))
               (width (coerce width 'double-float))
               (height (coerce height 'double-float))
-              (cairo:*context* (cairo:create ,surface-symbol)) ; set cairo default surface
+              (cairo:*context* (cairo:create-context ,surface-symbol)) ; set cairo default surface
               (,texture-name-symbol (first (gl:gen-textures 1))) ;create new opengl texture "name" (i.e. get an unused texture id)
               (line-width (* (min width height) *relative-line-width*))) ;some arbitray line width that scales with the image
          (cairo:set-line-width line-width)
