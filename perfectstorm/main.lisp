@@ -489,6 +489,11 @@
                                units))))))
     ;(make-instance 'universal-factory :pos (make-point -100 0) :owner cupe :queue '(killbox) :loop-queue-p t :rallying-point (make-point 40 40))))
 
+(defun create-terrain-2 ()
+  (make-instance
+   'terrain
+   :obstacles '()))
+
 (defun create-terrain-1 ()
   (make-instance
    'terrain
@@ -519,7 +524,7 @@
 
 (defun create-game-1 ()
   (make-instance 'game
-		 :terrain (create-terrain-1)))
+		 :terrain (create-terrain-2)))
 
 (defun storm ()
   (initialize-state)
