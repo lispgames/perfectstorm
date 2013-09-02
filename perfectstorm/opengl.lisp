@@ -60,7 +60,8 @@
     (when texture
       (gl:active-texture :texture0)
       (gl:bind-texture :texture-2d texture)
-      (when use-shader
+      (when (and use-shader
+                 (not (equal *current-shader* 0)))
         (gl:uniformi (gl:get-uniform-location *current-shader* "base-texture") 0)))
 
     texture))
