@@ -2,12 +2,15 @@
 #+AUTHOR: Cupe and members from #lispgames
 #+STARTUP: showeverything
 
-* TODO first
-  + Make perfectstorm run
-  + Update to cl-cairo2
+** TODO first
+*** Make perfectstorm compile and run
+*** Update libs
     There is a lot of unportable bindings in use, so it's not just
     "change the loaded lib" and be done with it, we'll have to change
     the existing code to correspond to the new bindings.
-  + Update cl-opengl and the rest also
-  + Fix/Change licenses
-  + Give Cupe more credit
+*** Fix/Change licenses
+*** Give Cupe more credit
+** TODO for [[https://github.com/gpadd][gpadd]]
+*** Read up on ENUMS for OpenGL
+*** Translate the TODO in perfectstorm/doc
+    into readable English and add it here.
