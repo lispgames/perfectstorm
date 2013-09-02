@@ -20,7 +20,7 @@
 
 (defun set-projection ()
   ;sets the projection matrix appropriately
-  ;needs to be called when window is being resized or *zoom*/*scroll* have changed 
+  ;needs to be called when window is being resized or *zoom*/*scroll* have changed
   (gl:matrix-mode :projection)
   (gl:load-identity)
   (let* ((x (x *scroll*))
@@ -51,18 +51,18 @@
     (draw  *selection-rectangle*)))
 
 (defun bind-texture (thing identifier use-shader)
-  
+
   (let ((texture (if (or
                       (not (owned thing))
                       (symbolp (owner thing)))
                      (gethash identifier *textures*) ;does not belong to a real player
                    (gethash identifier (textures (owner thing))))))
     (when texture
-      (gl:active-texture 0)
+      (gl:active-texture :texture0)
       (gl:bind-texture :texture-2d texture)
       (when use-shader
         (gl:uniformi (gl:get-uniform-location *current-shader* "base-texture") 0)))
-      
+
     texture))
   ;|#())
 
@@ -146,16 +146,16 @@
   (setf *quad-dl*
         (gl:gen-lists 1))
   (gl:with-new-list (*quad-dl* :compile-and-execute)
-    (gl:with-primitives :quads 
+    (gl:with-primitives :quads
       (gl:tex-coord 0  0)
       (gl:Vertex    -0.5 0.5 0)
-    
+
       (gl:tex-coord 1  0)
       (gl:Vertex   0.5 0.5 0)
-      
+
       (gl:tex-coord 1  1)
       (gl:Vertex   0.5 -0.5 0)
-      
+
       (gl:tex-coord 0  1)
       (gl:Vertex   -0.5 -0.5 0))))
 
@@ -171,14 +171,14 @@
   (unless %texture-chosen%
     (gl:bind-texture :texture-2d (aref *char-textures* (char-code #\?))))
  ; (print-vars entity)
-  (gl:with-pushed-matrix 
+  (gl:with-pushed-matrix
    ; (gl:scale (size-x thing) (size-y thing) 1)
     (gl:rotate (rot thing) 0 0 1)
     (gl:scale (size-x thing) (size-y thing) 1)
     (draw-quad)))
 
 (defmethod draw ((rectangle rectangle)) ;todo: no copypaste :)
-  (gl:with-pushed-matrix 
+  (gl:with-pushed-matrix
     (gl:rotate (rot rectangle) 0 0 1)
     (gl:scale (size-x rectangle) (size-y rectangle) 1)
     (destructuring-bind (r g b a) (color rectangle)
@@ -204,7 +204,7 @@
   (gl:with-pushed-matrix
     (gl:scale (* 0.005 5 *zoom*) (* 0.005 10 *zoom*) 1) ;TODO: hackhackhack
     (gl:push-matrix)
-    (gl:color 1 1 1 (* (alpha text) (base-alpha text))) 
+    (gl:color 1 1 1 (* (alpha text) (base-alpha text)))
     (loop for char across (text text)
           for index from 0 to (length (text text))
           do (let ((texture (aref *char-textures* (char-code char))))
@@ -285,7 +285,7 @@
 (defun draw-health-circle (pos radius health)
   (gl:use-program 0) ; is this necessary?
   (flet ((draw-circle-element (radius alpha)
-           (gl:with-pushed-matrix 
+           (gl:with-pushed-matrix
              (gl:translate (* radius 0.5) 0 0)
              (gl:scale 2
                        (max 1 (* radius 0.2))
@@ -329,13 +329,13 @@
 
 (defun init-shaders ()
   (dolist (shader-spec *shader-files*)
-    
+
     (bind:bind ((vertex-shader (gl:create-shader :vertex-shader))
            (fragment-shader (gl:create-shader :fragment-shader))
            (program (gl:create-program))
            ((name vertex-path fragment-path) shader-spec))
-           
-      
+
+
       (gl:shader-source vertex-shader (read-file vertex-path))
       (gl:shader-source fragment-shader (read-file fragment-path))
 
@@ -345,15 +345,12 @@
                                         ;(format t "~a ~%" (gl:get-shader-info-log vertex-shader))
 
                                         ;(format t "~a ~%" (gl:get-shader-info-log fragment-shader))
-    
+
       (gl:attach-shader program vertex-shader)
       (gl:attach-shader program fragment-shader)
-   
+
       (gl:link-program program)
 
       (format t "~a~%" (gl:get-program-info-log program))
                                         ;(gl:use-program program)
       (setf (getf *shaders* name) program))))
-   
-
-    
