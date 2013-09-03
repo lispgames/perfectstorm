@@ -2,15 +2,36 @@
 #+AUTHOR: Cupe and members from #lispgames
 #+STARTUP: showeverything
 
-** TODO first
-*** Make perfectstorm compile and run
-*** Update libs
+**revive
+*** DONE Make perfectstorm compile and run
+*** DONE Update libs
     There is a lot of unportable bindings in use, so it's not just
     "change the loaded lib" and be done with it, we'll have to change
     the existing code to correspond to the new bindings.
-*** Fix/Change licenses
-*** Give Cupe more credit
+*** TODO Fix/Change licenses
+*** TODO Give Cupe more credit
+** General
+*** TODO GUI-System, plan out
+*** TODO GUI Debugging: Unit-stats/target/command/etc
+*** TODO Command groups to do more things except giving destination
+*** TODO Shoot Rockets
+*** TODO Air/ground weapons
+*** TODO Sound
+*** TODO Proper feature checking (especially for shaders) and nice error messages too
+*** DONE Install cl-cairo2
+*** TODO Heap and/or priority-queue package
+** Bugs
+*** Crash when the leader for the group dies
+*** Mouse-cursor cannot be hidden, so one can't use the cool cursor instead
+*** Crash when units run off the grid
+** Graphics refactoring
+   Requirements:
+*** Draw on pieces that are sorted/grouped together
+**** Composite things as standard feature, which rotate together, move, stretch?
+     e.g. glows, caps at the end of laser
+**** Children must also be reached over its name
+**** Children must also
+*** Things in the engine have equivalent (entity) in the game
+    think about it
 ** TODO for [[https://github.com/gpadd][gpadd]]
 *** Read up on ENUMS for OpenGL
-*** Translate the TODO in perfectstorm/doc
-    into readable English and add it here.
