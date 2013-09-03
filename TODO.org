@@ -2,7 +2,7 @@
 #+AUTHOR: Cupe and members from #lispgames
 #+STARTUP: showeverything
 
-**revive
+** Revive
 *** DONE Make perfectstorm compile and run
 *** DONE Update libs
     There is a lot of unportable bindings in use, so it's not just
