@@ -1,0 +1,16 @@
+#+STARTUP: showeverything
+* About Perfectstorm
+  "Perfectstorm is a real time strategy game study written in common lisp
+  using OpenGL for graphics display and cairo for texture generation. It
+  is in active development with many of the basic features still
+  unimplemented, but i decided the effort put into it justifies some
+  public documentation." - Cupe
+* Status
+  As of now, it compiles and runs with sbcl (complete with bugs and
+  all kinds of yummy things).
+
+  This doesn't mean it's even near completion though. As said, there
+  are still bugs and crashes to take care of. There are also lots of
+  features and things to be completed before we can get close to that
+  end.
+* More to be added
