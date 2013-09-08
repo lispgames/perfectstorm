@@ -30,7 +30,6 @@
 **** Composite things as standard feature, which rotate together, move, stretch?
      e.g. glows, caps at the end of laser
 **** Children must also be reached over its name
-**** Children must also
 *** Things in the engine have equivalent (entity) in the game
     think about it
 ** TODO for [[https://github.com/gpadd][gpadd]]
