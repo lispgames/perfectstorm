@@ -74,10 +74,10 @@
   (gl:enable :depth-test)
   (gl:hint :perspective-correction-hint :nicest)
   (gl:enable :blend :texture-2d)
-  (gl:enable :fragment-shader)
-  (gl:enable :vertex-shader)
-  ;(gl:enable :fragment-program-arb)
-  ;(gl:enable :vertex-program-arb)
+  ;;(gl:enable :fragment-shader)
+  ;;(gl:enable :vertex-shader) ;; This one send you to the debugger
+  ;;(gl:enable :fragment-program-arb)
+  ;;(gl:enable :vertex-program-arb)
   (gl:blend-func :src-alpha :one) ;additive blending for nice glowing stuff
   (gl:enable :color-material)
 
@@ -88,15 +88,13 @@
   (gl:light :light0 :position '(-5 -5 5 10))
   (make-quad-dl)
 
- ; (init-shaders)
- ; (format t "shaders initialized.")
- ; (gl:blend-func :src-alpha :src-color)
+  ;; (init-shaders)
+  ;; (format t "shaders initialized.")
+  ;; (gl:blend-func :src-alpha :src-color)
   (gl:clear :color-buffer-bit :depth-buffer-bit)
   (glut:swap-buffers)
   (glut:post-redisplay))
-;  (generate-textures))
-
-
+;; (generate-textures))
 
 (defmethod glut:reshape ((w storm-window) width height)
   (gl:viewport 0 0 width height)
