@@ -50,7 +50,7 @@
              1.2) ;selection indicator must be larger than the unit
           (rot (selected entity))
           (+ 2 (rot (selected entity)))))
-  
+
   (grid-update entity)
   (call-next-method))
 
@@ -98,7 +98,7 @@
         (velocity unit)
         (rotate (make-point 0 (max-speed unit))
                 (rot unit)))
-  
+
   (call-next-method))
 
 
@@ -130,7 +130,7 @@
                                        (max-speed rocket))))
 
 
-  
+
   (when (or (not (target rocket)) ;if target is lost, take the weapon's next target as new target if available
             (invalid (target rocket)))
     (if (and (target (source-weapon rocket))
@@ -157,7 +157,7 @@
 
     (setf (rot rocket) (+ (rot rocket)
                           (angular-velocity rocket))))
- 
+
   (if (or (not (target rocket))
           (< (distance (pos rocket) (pos (target rocket)))
              (trigger-distance rocket)))
@@ -189,7 +189,7 @@
  (setf (alpha beam)
        (min 1
             (+ 0.1 (alpha beam)))
-  
+
         (pos (first (children beam)))
         (pos (source-weapon beam))
         (pos (second (children beam)))
@@ -203,11 +203,11 @@
   ;at present, damage is dealt when the shockwave has reached half its maximum radius.
   (when (and (> (* 2 (radius explosion))
                 (damage-radius explosion))
-             (not (damage-dealt-p explosion))) 
+             (not (damage-dealt-p explosion)))
       (deal-damage explosion))
   (when (> (radius explosion) (damage-radius explosion))
       (invalidate  explosion)))
-       
+
 (defmethod tick ((explosion explosion))
   (setf (radius explosion)
           (+ (radius explosion) *speed-of-sound*)
@@ -227,8 +227,10 @@
 ;;
 
 (defmethod cost ((unit-name symbol))
-  (sb-mop:finalize-inheritance (find-class unit-name)); has to be done only once. TODO: remove from here
-  (slot-value (sb-mop:class-prototype (find-class unit-name)) 'cost))
+  (c2mop:finalize-inheritance (find-class unit-name)); has to be done
+                                        ; only once. TODO: remove from
+                                        ; here
+  (slot-value (c2mop:class-prototype (find-class unit-name)) 'cost))
 
 (defmethod tick ((factory factory))
   (incf (progress factory)
@@ -240,7 +242,7 @@
                          :destination (rallying-point factory))
           (current-cost factory)
           (cost (first (queue factory)))))
-                         
+
   (when (>= (progress factory)
             (current-cost factory))
     (setf (current-cost factory)
