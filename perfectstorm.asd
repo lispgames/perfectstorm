@@ -11,6 +11,7 @@
                cl-cairo2
                infix
                metabang-bind
+               closer-mop
                toolbox
                vektor)
   :components
