@@ -90,7 +90,7 @@
     (setf (slot-value (parent child) 'children)
           (remove child (children (parent child))))
     (setf (slot-value child 'parent) nil)))
-  
+
 
 (defmethod acquaint ((parent composite) (children cons))
   (dolist (child children)
@@ -165,7 +165,7 @@
   ((owned :initform t)))
 
 (defclass entity (owned-thing visible-thing)
-   ((grid-pos 
+   ((grid-pos
      :initform (list -1 -1)
      :accessor grid-pos)
     (invalid ;if t, entity is scheduled for removal and won't be drawn or anything else
@@ -187,7 +187,7 @@
 (defmethod initialize-instance :after ((entity entity) &key (dont-add nil))
   (unless dont-add
     (push entity *entities*)))
-    
+
 (defclass independent-entity (entity)
   ())
 
@@ -306,7 +306,7 @@
    (selectable
     :initform t)))
 
-(sb-mop:finalize-inheritance (find-class 'unit))
+(c2mop:finalize-inheritance (find-class 'unit))
 
 (defmethod initialize-instance :after ((unit unit) &key (weapons ()) (group ()) (dont-add nil))
   (unless dont-add
@@ -319,7 +319,7 @@
   (when group
     (join-group unit group))
   (acquaint unit (weapons unit)))
-  
+
 (defclass ground-unit (visible-circle unit)
   ((new-positions ;list of new positions created by bumping into other units. the centroid of these positions will be used as the new pos prior to move
     :initform ()
@@ -394,7 +394,7 @@
           do (setf (relative-pos (nth weapon-number wing-weapons))
                    (add (make-point 0 0.3)
                         (normalize (make-point 3 -2)
-                                   (- 1 (/ weapon-number (length wing-weapons)))))                      
+                                   (- 1 (/ weapon-number (length wing-weapons)))))
                    (relative-pos (nth (+ 1 weapon-number) wing-weapons))
                    (add (make-point 0 0.3)
                         (normalize (make-point -3 -2)
@@ -639,7 +639,7 @@
   (unless with-shockwave
     (setf (drawable explosion)
           nil)))
-                                
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
 ;;; purely visual objects
