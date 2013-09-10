@@ -32,5 +32,3 @@
 **** Children must also be reached over its name
 *** Things in the engine have equivalent (entity) in the game
     think about it
-** TODO for [[https://github.com/gpadd][gpadd]]
-*** Read up on ENUMS for OpenGL
