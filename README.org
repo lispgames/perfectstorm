@@ -13,4 +13,9 @@
   are still bugs and crashes to take care of. There are also lots of
   features and things to be completed before we can get close to that
   end.
+* Running it
+  I've added it to quicklisp/local-projects/ so that I can load it
+  into quicklisp with a simple `(ql:quickload 'perfectstorm)´
+  Then I start the game with (storm:storm).
+  Done, your running the game.
 * More to be added
