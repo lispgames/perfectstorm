@@ -16,6 +16,6 @@
 * Running it
   I've added it to quicklisp/local-projects/ so that I can load it
   into quicklisp with a simple `(ql:quickload 'perfectstorm)´
-  Then I start the game with (storm:storm).
+  Then I start the game with `(storm:storm)´.
   Done, your running the game.
 * More to be added
