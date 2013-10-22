@@ -465,8 +465,8 @@
 
 
 (defun create-initial-units ()
-  (let* ((syb (make-instance 'player :name "syb" :color '(0   0.2 1  1)))
-         (cupe  (make-instance 'player :name "cupe"  :color '(0.9 0.5 0  1)))
+  (let* ((syb (make-instance 'player :name "CPU" :color '(0   0.2 1  1)))
+         (cupe  (make-instance 'player :name "Player-1"  :color '(0.9 0.5 0  1)))
          (cupe-group (make-instance 'group :owner cupe))
          (syb-group (make-instance 'group :owner syb)))
     (grid-init)
@@ -486,11 +486,6 @@
                                  (append (list owner group) specs))
                                units))))))
     ;(make-instance 'universal-factory :pos (make-point -100 0) :owner cupe :queue '(killbox) :loop-queue-p t :rallying-point (make-point 40 40))))
-
-(defun create-terrain-2 ()
-  (make-instance
-   'terrain
-   :obstacles '()))
 
 (defun create-terrain-1 ()
   (make-instance
@@ -520,13 +515,22 @@
 									     (make-point 100 -100)
 									     (make-point 30 -80)))))))
 
+(defun create-terrain-2 ()
+  (make-instance
+   'terrain
+   :obstacles '()))
+
 (defun create-game-1 ()
+  (make-instance 'game
+		 :terrain (create-terrain-1)))
+
+(defun create-game-2 ()
   (make-instance 'game
 		 :terrain (create-terrain-2)))
 
 (defun storm ()
   (initialize-state)
-  (setf *game* (create-game-1))
+  (setf *game* (create-game-2))
   (setf *quadtree* (quadtree (terrain *game*)))
   (create-initial-units)
   (push *quadtree* *gui-things*)
