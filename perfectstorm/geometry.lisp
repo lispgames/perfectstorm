@@ -32,14 +32,14 @@
   (min (distance p (make-line (make-point (xmin b) (ymin b)) (make-point (xmax b) (ymin b))))
        (distance p (make-line (make-point (xmax b) (ymin b)) (make-point (xmax b) (ymax b))))
        (distance p (make-line (make-point (xmax b) (ymax b)) (make-point (xmin b) (ymax b))))
-       (distance p (make-line (make-point (xmin b) (ymax b)) (make-point (xmin b) (ymin b))))))       
+       (distance p (make-line (make-point (xmin b) (ymax b)) (make-point (xmin b) (ymin b))))))
 
 (defmethod contains? ((b bounding-box) (p vektor))
   (and (and (>= (x p) (xmin b)) (<= (x p) (xmax b)))
        (and (>= (y p) (ymin b)) (<= (y p) (ymax b)))))
 
 (defmethod intersects? ((a bounding-box) (b bounding-box) &key)
-  (and 
+  (and
    (or (and (>= (xmin a) (xmin b)) (<= (xmin a) (xmax b)))
        (and (>= (xmin b) (xmin a)) (<= (xmin b) (xmax a))))
    (or (and (>= (xmin a) (xmin b)) (<= (xmin a) (xmax b)))
@@ -122,7 +122,7 @@
 
 (defmethod distance ((c circle) (p vektor))
   (values (- (distance (center c) p) (radius c))
-	  (add (center c) 
+	  (add (center c)
 	       (normalize (subtract p (center c)) (radius c)))))
 
 (defmethod distance ((p vektor) (line line))
@@ -137,10 +137,10 @@
 	       (cond ((> s 1)
 		      (values (distance p b)
 			      lot))
-		     ((< s 0) 
+		     ((< s 0)
 		      (values (distance p a)
 			      lot))
-		     (t 
+		     (t
 		      (values (distance p lot)
 			      lot))))
       ; line is degenerated
@@ -171,7 +171,7 @@
            (num2
             #I((x2 - x1) * (y1 -  y3)
                - (y2 - y1) * (x1 - x3))))
-  
+
       (if (= 0 denominator)
                                         ; lines are parallel or congruent
           (values
@@ -256,14 +256,14 @@
   (min (distance p (make-line (make-point (xmin b) (ymin b)) (make-point (xmax b) (ymin b))))
        (distance p (make-line (make-point (xmax b) (ymin b)) (make-point (xmax b) (ymax b))))
        (distance p (make-line (make-point (xmax b) (ymax b)) (make-point (xmin b) (ymax b))))
-       (distance p (make-line (make-point (xmin b) (ymax b)) (make-point (xmin b) (ymin b))))))       
+       (distance p (make-line (make-point (xmin b) (ymax b)) (make-point (xmin b) (ymin b))))))
 
 (defmethod contains? ((b bounding-box) (p vektor))
   (and (and (>= (x p) (xmin b)) (<= (x p) (xmax b)))
        (and (>= (y p) (ymin b)) (<= (y p) (ymax b)))))
 
 (defmethod intersects? ((a bounding-box) (b bounding-box) &key)
-  (and 
+  (and
    (or (and (>= (xmin a) (xmin b)) (<= (xmin a) (xmax b)))
        (and (>= (xmin b) (xmin a)) (<= (xmin b) (xmax a))))
    (or (and (>= (xmin a) (xmin b)) (<= (xmin a) (xmax b)))
@@ -272,7 +272,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; polygon
 (defclass polygon ()
-  ((corners 
+  ((corners
     :initarg :corners
     :initform (error "polygon needs corners")
     :reader corners)
@@ -282,8 +282,8 @@
     :reader bounding-box)))
 
 (defmethod initialize-instance :after ((p polygon) &key)
-  (setf (slot-value p 'lines) 
-	(loop 
+  (setf (slot-value p 'lines)
+	(loop
 	 :for i :below (length (corners p)) :collect
 	 (make-line (elt (corners p) i) (elt-mod (corners p) (+ i 1)))))
   (setf (slot-value p 'bounding-box)
@@ -322,7 +322,7 @@
 (defmethod intersects? ((p polygon) (q polygon) &key (check-inclusion nil))
   ; check if bounding boxes intersect
   (when (intersects? (bounding-box p) (bounding-box q))
-    
+
     ; check all lines for intersections
     ; return t if one exists
     (dolist (p-line (lines p))
