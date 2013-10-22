@@ -8,7 +8,10 @@
     There is a lot of unportable bindings in use, so it's not just
     "change the loaded lib" and be done with it, we'll have to change
     the existing code to correspond to the new bindings.
-*** TODO Fix/Change licenses
+*** TODO [#C] Fix/Change licenses
+    Is this really important? Not really, at least not yet. Although
+    it would be good to change to something like LGPL, BSD or MIT for
+    the license.
 *** TODO Give Cupe more credit
 ** General
 *** TODO GUI-System, plan out
@@ -22,8 +25,10 @@
 *** TODO Heap and/or priority-queue package
 ** Bugs
 *** Crash when the leader for the group dies
+    How is the leader determined? And how is it displayed to the player?
 *** Mouse-cursor cannot be hidden, so one can't use the cool cursor instead
 *** Crash when units run off the grid
+*** Crash when clicking outside the grid
 ** Graphics refactoring
    Requirements:
 *** Draw on pieces that are sorted/grouped together
