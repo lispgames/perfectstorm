@@ -19,8 +19,8 @@
   (gl:vertex (x point) (y point) 0))
 
 (defun set-projection ()
-  ;sets the projection matrix appropriately
-  ;needs to be called when window is being resized or *zoom*/*scroll* have changed
+                                        ;sets the projection matrix appropriately
+                                        ;needs to be called when window is being resized or *zoom*/*scroll* have changed
   (gl:matrix-mode :projection)
   (gl:load-identity)
   (let* ((x (x *scroll*))
@@ -36,17 +36,17 @@
 (defun draw-all-entities ()
   (gl:load-identity)
   (dolist (entity *independent-entities*)
-      (draw entity)))
+    (draw entity)))
 
 (defun draw-gui ()
   (gl:load-identity)
   (gl:use-program 0)
 
-  ;(gl:blend-func :src-alpha :one-minus-src-alpha)
+                                        ;(gl:blend-func :src-alpha :one-minus-src-alpha)
   (dolist (thing *gui-things*)
-      (draw thing))
+    (draw thing))
 
-  ;(gl:blend-func :src-alpha :one)
+                                        ;(gl:blend-func :src-alpha :one)
   (when *selection-rectangle*
     (draw  *selection-rectangle*)))
 
@@ -56,7 +56,7 @@
                       (not (owned thing))
                       (symbolp (owner thing)))
                      (gethash identifier *textures*) ;does not belong to a real player
-                   (gethash identifier (textures (owner thing))))))
+                     (gethash identifier (textures (owner thing))))))
     (when texture
       (gl:active-texture :texture0)
       (gl:bind-texture :texture-2d texture)
@@ -65,31 +65,31 @@
         (gl:uniformi (gl:get-uniform-location *current-shader* "base-texture") 0)))
 
     texture))
-  ;|#())
+                                        ;|#())
 
 
 (defmacro defdrawmethod (class &rest args)
                                         ;produces a (defmethod draw ((class class)) ...)
                                         ;it executes a body and afterwards (unless :no-texture is provided) binds the appropriate texture and shader.
- `(defmethod draw ((,class ,class))
-    (declare (special %texture-chosen%)) ; see corresponding :around method below.
-    ,@args       ;body. (don't bother removing a possible :no-texture)
-    (let* ((shader-name (shader ,class))
-           (shader (or (and shader-name
-                            (getf *shaders* (shader ,class)))
-                       0)))
-      ,(when (or (not args)
-                 (not (eq (first args) :no-texture)))
-             `(when (and (not %texture-chosen%) ;if a more specific texture has been found, don't overwrite it
-                     (drawable ,class)
-                     (bind-texture ,class ',class shader-name))
-               (setf %texture-chosen% t)))
-      (unless *disable-shaders*
-        (when (not (= *current-shader* (or shader 0)))
-          (gl:use-program shader)
-          (setf *current-shader* shader)))
-      (when (drawable ,class)
-        (call-next-method)))))
+  `(defmethod draw ((,class ,class))
+     (declare (special %texture-chosen%)) ; see corresponding :around method below.
+     ,@args       ;body. (don't bother removing a possible :no-texture)
+     (let* ((shader-name (shader ,class))
+            (shader (or (and shader-name
+                             (getf *shaders* (shader ,class)))
+                        0)))
+       ,(when (or (not args)
+                  (not (eq (first args) :no-texture)))
+              `(when (and (not %texture-chosen%) ;if a more specific texture has been found, don't overwrite it
+                          (drawable ,class)
+                          (bind-texture ,class ',class shader-name))
+                 (setf %texture-chosen% t)))
+       (unless *disable-shaders*
+         (when (not (= *current-shader* (or shader 0)))
+           (gl:use-program shader)
+           (setf *current-shader* shader)))
+       (when (drawable ,class)
+         (call-next-method)))))
 
 (defun set-blend-mode (mode)
   (unless (eq mode *current-blend-mode*)
@@ -131,7 +131,7 @@
                        3
                        :color '(0 0 1 0.8)
                        :bind-texture t))
-      ;(mapcar #'draw (waypoint-lines (group entity))))
+                                        ;(mapcar #'draw (waypoint-lines (group entity))))
     (when (or (selected entity)
               *show-all-health-circles*)
       (draw-health-circle (pos entity)
@@ -171,9 +171,9 @@
   (declare (special %texture-chosen%))
   (unless %texture-chosen%
     (gl:bind-texture :texture-2d (aref *char-textures* (char-code #\?))))
- ; (print-vars entity)
+                                        ; (print-vars entity)
   (gl:with-pushed-matrix
-   ; (gl:scale (size-x thing) (size-y thing) 1)
+                                        ; (gl:scale (size-x thing) (size-y thing) 1)
     (gl:rotate (rot thing) 0 0 1)
     (gl:scale (size-x thing) (size-y thing) 1)
     (draw-quad)))
@@ -184,13 +184,13 @@
     (gl:scale (size-x rectangle) (size-y rectangle) 1)
     (destructuring-bind (r g b a) (color rectangle)
       (gl:color r g b (* a (alpha rectangle) (base-alpha rectangle)))
-    (draw-quad))))
+      (draw-quad))))
 
 (defmacro make-defdrawmethods (drawable-things)
-    (let ((definitions (loop for item in drawable-things
-                             collecting `(defdrawmethod ,item))))
-      `(eval-when (:compile-toplevel :load-toplevel)
-         ,@definitions)))
+  (let ((definitions (loop for item in drawable-things
+                        collecting `(defdrawmethod ,item))))
+    `(eval-when (:compile-toplevel :load-toplevel)
+       ,@definitions)))
 
 (make-defdrawmethods (weapon air-unit ground-unit explosion bullet laser-beam rocket cupes-polygon selection-indicator factory))
 
@@ -198,8 +198,8 @@
     (apply #'gl:color (color visible-line)))
 
 (defdrawmethod glow
-  (let ((factor (+ 0.2 (* 0.8 (alpha glow)))))
-    (gl:scale factor factor 1))) ;make glow smaller when its alpha value is low
+    (let ((factor (+ 0.2 (* 0.8 (alpha glow)))))
+      (gl:scale factor factor 1))) ;make glow smaller when its alpha value is low
 
 (defdrawmethod text :no-texture
   (gl:with-pushed-matrix
@@ -207,23 +207,23 @@
     (gl:push-matrix)
     (gl:color 1 1 1 (* (alpha text) (base-alpha text)))
     (loop for char across (text text)
-          for index from 0 to (length (text text))
-          do (let ((texture (aref *char-textures* (char-code char))))
-               (if (char= char #\newline)
-                   (progn
-                     (gl:pop-matrix) ;get old state (beginning of line)
-                     (gl:translate 0 -1 0) ;move one line down
-                     (gl:push-matrix))  ;start again
-                   (if (not (= texture 0))
-                       (progn
-                         (gl:bind-texture :texture-2d texture)
-                         (draw-quad)
-                         (when (= index (cursor-pos text))
-                           (gl:bind-texture :texture-2d 0)
-                           (gl:color 0.5 0.5 1 (+ 0.4 (* (sin (/ *gl-ticks* 10)) 0.1)))
-                           (draw-quad)
-                           (gl:color 1 1 1 1))
-                         (gl:translate 1 0 0))))))
+       for index from 0 to (length (text text))
+       do (let ((texture (aref *char-textures* (char-code char))))
+            (if (char= char #\newline)
+                (progn
+                  (gl:pop-matrix) ;get old state (beginning of line)
+                  (gl:translate 0 -1 0) ;move one line down
+                  (gl:push-matrix))  ;start again
+                (if (not (= texture 0))
+                    (progn
+                      (gl:bind-texture :texture-2d texture)
+                      (draw-quad)
+                      (when (= index (cursor-pos text))
+                        (gl:bind-texture :texture-2d 0)
+                        (gl:color 0.5 0.5 1 (+ 0.4 (* (sin (/ *gl-ticks* 10)) 0.1)))
+                        (draw-quad)
+                        (gl:color 1 1 1 1))
+                      (gl:translate 1 0 0))))))
     (gl:pop-matrix)))
 
 (defdrawmethod cursor
@@ -236,47 +236,47 @@
     (apply #'gl:color color))
   (when (< 1 (length points))
     (flet ((draw-pair (base-point offset)
-              (gl:tex-coord 0 0)
-              (gl-vertex (add base-point offset))
-              (gl:tex-coord 0 1)
-              (gl-vertex (subtract base-point offset))))
-  (let ((first (first points))
-        (last (and closed (first (last points)))) ; the last point will only be needed twice when the line strip is :closed t
-        (prev nil)
-        (current nil)
-        (first-u nil)
-        (next nil))
-    (gl:with-primitives :quad-strip
-    (loop for i from 0 below (+ 1 (length points))
-          do (progn
-               (setf prev current
-                     current next
-                     next (and points (pop points)));this pop is non-destructive
-               (when current
-                 (let ((u (cond ((or closed
-                                     (and prev next))
-                                 (let* ((prev (or prev last))
-                                        (next (or next first))
-                                        (d0 (subtract prev current))
-                                        (d2 (subtract next current))
-                                        (denominator (- (* (x d0) (y d2))
-                                                        (* (y d0) (x d2)))))
-                                   (if (= 0 denominator)
-                                       (let ((v (normalize d2 width)))
-                                         (make-point (y v) (- (x v))))
-                                     (scale (add (scale d0 (absolute d2))
-                                                 (scale d2 (absolute d0)))
-                                            (/ width denominator)))))
-                                (t
-                                 (let* ((neighbour (or prev next))
-                                        (v (normalize (subtract neighbour current) (* (if prev -1 1) width))))
-                                   (make-point (y v) (- (x v))))))))
-                   (when (< (* 4 width) (absolute u))    ;for very acute angles, u can become very large. as in this case the line strip
-                     (setf u (normalize u (* 4 width)))) ;can't be drawn nicely anyway, we simply crop u.
-                   (unless first-u (setf first-u u))
-                   (draw-pair current u)))))
-    (when closed
-      (draw-pair first first-u))))))) ;close the polygon by going back to the start
+             (gl:tex-coord 0 0)
+             (gl-vertex (add base-point offset))
+             (gl:tex-coord 0 1)
+             (gl-vertex (subtract base-point offset))))
+      (let ((first (first points))
+            (last (and closed (first (last points)))) ; the last point will only be needed twice when the line strip is :closed t
+            (prev nil)
+            (current nil)
+            (first-u nil)
+            (next nil))
+        (gl:with-primitives :quad-strip
+          (loop for i from 0 below (+ 1 (length points))
+             do (progn
+                  (setf prev current
+                        current next
+                        next (and points (pop points)));this pop is non-destructive
+                  (when current
+                    (let ((u (cond ((or closed
+                                        (and prev next))
+                                    (let* ((prev (or prev last))
+                                           (next (or next first))
+                                           (d0 (subtract prev current))
+                                           (d2 (subtract next current))
+                                           (denominator (- (* (x d0) (y d2))
+                                                           (* (y d0) (x d2)))))
+                                      (if (= 0 denominator)
+                                          (let ((v (normalize d2 width)))
+                                            (make-point (y v) (- (x v))))
+                                          (scale (add (scale d0 (absolute d2))
+                                                      (scale d2 (absolute d0)))
+                                                 (/ width denominator)))))
+                                   (t
+                                    (let* ((neighbour (or prev next))
+                                           (v (normalize (subtract neighbour current) (* (if prev -1 1) width))))
+                                      (make-point (y v) (- (x v))))))))
+                      (when (< (* 4 width) (absolute u))    ;for very acute angles, u can become very large. as in this case the line strip
+                        (setf u (normalize u (* 4 width)))) ;can't be drawn nicely anyway, we simply crop u.
+                      (unless first-u (setf first-u u))
+                      (draw-pair current u)))))
+          (when closed
+            (draw-pair first first-u))))))) ;close the polygon by going back to the start
 
 
 (defparameter *num-health-elements* 12)
@@ -332,9 +332,9 @@
   (dolist (shader-spec *shader-files*)
 
     (bind:bind ((vertex-shader (gl:create-shader :vertex-shader))
-           (fragment-shader (gl:create-shader :fragment-shader))
-           (program (gl:create-program))
-           ((name vertex-path fragment-path) shader-spec))
+                (fragment-shader (gl:create-shader :fragment-shader))
+                (program (gl:create-program))
+                ((name vertex-path fragment-path) shader-spec))
 
 
       (gl:shader-source vertex-shader (read-file vertex-path))
