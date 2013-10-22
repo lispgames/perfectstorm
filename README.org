@@ -6,8 +6,8 @@
   unimplemented, but i decided the effort put into it justifies some
   public documentation." - Cupe
 * Status
-  As of now, it compiles and runs with sbcl (complete with bugs and
-  all kinds of yummy things).
+  As of now, it compiles and runs with sbcl and ccl (complete with bugs and
+  all kinds of yummy things) but not clisp (yet).
 
   This doesn't mean it's even near completion though. As said, there
   are still bugs and crashes to take care of. There are also lots of
