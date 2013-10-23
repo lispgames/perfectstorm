@@ -452,25 +452,33 @@
         vektor:*angle-mode* :deg))
 
 
-(defparameter *initial-units-syb*
-  ;(unit-name count x y)
-  '((kronleuchter 3   100 0  )
-    (starfury     0  100 100)))
-
-(defparameter *initial-units-cupe*
+(defparameter *initial-units-player0*
   ;(unit-name count x y)
   '((dicke-berta   2  -100 0  )
     (kronleuchter2 0 -100 0  )
     (killbox       10 -100 100)))
 
+(defparameter *initial-units-player1*
+  ;(unit-name count x y)
+  '((kronleuchter 3   100 0  )
+    (starfury     0  100 100)))
+
+
+
+(defparameter *initial-units-player2*
+  ;;(unit-name count x y)
+  '((kronleuchter  2 50 -100)
+    (killbox       8 50 -100)))
 
 (defun create-initial-units ()
-  (let* ((syb (make-instance 'player :name "CPU" :color '(0   0.2 1  1)))
-         (cupe  (make-instance 'player :name "Player-1"  :color '(0.9 0.5 0  1)))
-         (cupe-group (make-instance 'group :owner cupe))
-         (syb-group (make-instance 'group :owner syb)))
+  (let* ((player0 (make-instance 'player :name "player 0" :color '(0.9 0.5 0 1)))
+         (player1 (make-instance 'player :name "player 1" :color '(0 0.2 1 1)))
+         (player2 (make-instance 'player :name "player 2" :color '(0 1 0 1)))
+         (player0-group (make-instance 'group :owner player0))
+         (player1-group (make-instance 'group :owner player1))
+         (player2-group (make-instance 'group :owner player2)))
     (grid-init)
-    (setf *gui-owner* cupe)
+    (setf *gui-owner* player0)
     (flet ((create-units (specs)
              (destructuring-bind (owner group name count x y) specs
                (dotimes (i count)
@@ -479,8 +487,9 @@
                                 :pos (make-point (+ x (random 200) (- 100))
                                                  (+ y (random 200) (- 100)))
                                 :group group)))))
-      (loop for (owner group units) in `(,(list cupe cupe-group *initial-units-cupe*)
-                                         ,(list syb  syb-group  *initial-units-syb* ))
+      (loop for (owner group units) in `(,(list player0 player0-group *initial-units-player0*)
+                                          ,(list player1  player1-group  *initial-units-player1* )
+                                          ,(list player2 player2-group *initial-units-player2*))
             do (mapcar #'create-units
                        (mapcar (lambda (specs)
                                  (append (list owner group) specs))
