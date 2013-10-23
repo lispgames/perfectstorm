@@ -14,8 +14,7 @@
   features and things to be completed before we can get close to that
   end.
 * Running it
-  Add it to "/home/your-username/quicklisp/local-projects/" (where
-  your-username is your actual username) so that you can load it
+  Add it to "$HOME/quicklisp/local-projects/" so that you can load it
   into quicklisp with a simple:
 
   `(ql:quickload 'perfectstorm)´
