@@ -23,6 +23,10 @@
 *** TODO Proper feature checking (especially for shaders) and nice error messages too
 *** DONE Install cl-cairo2
 *** TODO Heap and/or priority-queue package
+*** TODO Start doing things at the same time
+    example: When having about 80 units on each team onscreen, and you select
+    somewhere for a high % of those units to move, the game stops to
+    calculate the path(s) there. Make it use a co-routine or something.
 ** Bugs
 *** Crash when the leader for the group dies
     How is the leader determined? And how is it displayed to the player?
