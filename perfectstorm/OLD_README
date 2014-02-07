@@ -1,0 +1,33 @@
+installation:
+
+system dependencies:
+
+* sbcl >= 1.0.13
+* cairo
+* opengl
+* freetype
+* glut
+
+lisp dependencies:
+
+* cffi (through asdf-install)
+* metabang-bind (through-asdf-install)
+* cl-opengl from svn://erleuchtet.org/cl-opengl-thomas
+* cl-cairo from svn://erleuchtet.org/cl-cairo
+* infpre from svn://erleuchtet.org/infpre
+* toolbox from svn://erleuchtet.org/toolbox
+* vektor from svn://erleuchtet.org/vektor
+
+currently you have to start your lisp from within the perfectstorm directory. this will be fixed.
+
+after loading: (asdf:oos 'asdf:load-op :perfectstorm)
+run (storm:storm)
+
+key/mouse-bindings:
+* wasd - scroll
+* mouse-wheel or +/- - zoom
+* v - toggle shaders
+* h - toggle health bars
+* ` or ^ - developer console :D
+* f - (fake)fullscreen
+* esc - quit
