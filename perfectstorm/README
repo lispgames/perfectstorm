@@ -2,7 +2,7 @@ installation:
 
 system dependencies:
 
-* sbcl >= 1.0.13
+* sbcl >= 1.0.13 (preferably >= 1.1.0) ccl and clisp should work also nowdays
 * cairo
 * opengl
 * freetype
@@ -10,17 +10,15 @@ system dependencies:
 
 lisp dependencies:
 
-* cffi (through asdf-install)
-* metabang-bind (through-asdf-install)
-* cl-opengl from svn://erleuchtet.org/cl-opengl-thomas
-* cl-cairo from svn://erleuchtet.org/cl-cairo
-* infpre from svn://erleuchtet.org/infpre
-* toolbox from svn://erleuchtet.org/toolbox
-* vektor from svn://erleuchtet.org/vektor
+* cffi from quicklisp
+* metabang-bind from quicklisp
+* cl-opengl from quicklisp
+* cl-cairo from quicklisp
+* infpre from quicklisp
+* toolbox from quicklisp
+* vektor from quicklisp
 
-currently you have to start your lisp from within the perfectstorm directory. this will be fixed.
-
-after loading: (asdf:oos 'asdf:load-op :perfectstorm)
+after loading: (ql:quickload :perfectstorm)
 run (storm:storm)
 
 key/mouse-bindings:
