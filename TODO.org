@@ -3,17 +3,19 @@
 #+STARTUP: showeverything
 
 ** Revive
+*** TODO Create simple goals to work towards
+**** TODO A goal for the game (How to finish a game)
+**** TODO API for AI
+**** TODO Create a configuration system
 *** DONE Make perfectstorm compile and run
 *** DONE Update libs
     There is a lot of unportable bindings in use, so it's not just
     "change the loaded lib" and be done with it, we'll have to change
     the existing code to correspond to the new bindings.
-*** TODO Change from cl-glut and co. to cl-sdl2..
-*** TODO [#C] Fix/Change licenses
+*** DONE [#C] Fix/Change licenses
     Is this really important? Not really, at least not yet. Although
     it would be good to change to something like LGPL, BSD or MIT for
     the license.
-*** TODO Give Cupe more credit
 ** General
 *** TODO GUI-System, plan out
 *** TODO GUI Debugging: Unit-stats/target/command/etc
