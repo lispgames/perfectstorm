@@ -9,7 +9,6 @@
                cl-glut
                cl-glu
                cl-cairo2
-               sdl2
                infix
                metabang-bind
                closer-mop
