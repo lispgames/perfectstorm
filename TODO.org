@@ -1,48 +1,48 @@
 #+TITLE: The TODO
-#+AUTHOR: Cupe, add and other members from #lispgames
+#+AUTHOR: See file: AUTHORS
 #+STARTUP: showeverything
 
-** Revive
-*** TODO Create simple goals to work towards
-**** TODO A goal for the game (How to finish a game)
-**** TODO API for AI
-**** TODO Create a configuration system
-*** DONE Make perfectstorm compile and run
-*** DONE Update libs
-    There is a lot of unportable bindings in use, so it's not just
-    "change the loaded lib" and be done with it, we'll have to change
-    the existing code to correspond to the new bindings.
-*** DONE [#C] Fix/Change licenses
-    Is this really important? Not really, at least not yet. Although
-    it would be good to change to something like LGPL, BSD or MIT for
-    the license.
-** General
-*** TODO GUI-System, plan out
-*** TODO GUI Debugging: Unit-stats/target/command/etc
-*** TODO Command groups to do more things except giving destination
-*** TODO Shoot Rockets
-*** TODO Air/ground weapons
-*** TODO Sound
-*** TODO Proper feature checking (especially for shaders) and nice error messages too
-*** DONE Install cl-cairo2
-*** TODO Heap and/or priority-queue package
-*** TODO Start doing things at the same time
-    example: When having about 80 units on each team onscreen, and you select
-    somewhere for a high % of those units to move, the game stops to
-    calculate the path(s) there. Make it use a co-routine or something.
-** Bugs
-*** Crash when the leader for the group dies
-    How is the leader determined? And (how) is it displayed to the player?
-*** Mouse-cursor cannot be hidden, so one can't use the cool cursor instead
-*** Crash when units run off the grid
-    You will have to order them to do something though, otherwise it
-    doesn't crash..
-*** Crash when clicking outside the grid
-** Graphics refactoring
-   Requirements:
-*** Draw on pieces that are sorted/grouped together
-**** Composite things as standard feature, which rotate together, move, stretch?
-     e.g. glows, caps at the end of laser
-**** Children must also be reached over its name
-*** Things in the engine have equivalent (entity) in the game
-    think about it (it's brilliant)
+* Revive
+** TODO [#B] Create simple goals to work towards
+*** TODO [#B] A goal for the game (How to finish a game)
+*** TODO [#C] API for AI
+*** TODO Create a configuration system
+** DONE [#A] Make perfectstorm compile and run
+** DONE [#B] Update libs
+   There is a lot of unportable bindings in use, so it's not just
+   "change the loaded lib" and be done with it, we'll have to change
+   the existing code to correspond to the new bindings.
+** DONE [#C] Fix/Change licenses
+   Is this really important? Not really, at least not yet. Although
+   it would be good to change to something like LGPL, BSD or MIT for
+   the license.
+* General
+** TODO [#B] GUI-System, plan out
+** TODO [#C] GUI Debugging: Unit-stats/target/command/etc
+** TODO [#B] Command groups to do more things except giving destination
+** TODO [#B] Shoot Rockets
+** TODO [#C] Air/ground weapons
+** TODO [#C] Sound
+** TODO [#B] Proper feature checking (especially for shaders) and nice error messages too
+** DONE [#A] Install cl-cairo2
+** TODO [#B] Heap and/or priority-queue package
+** TODO [#A] Start doing things at the same time
+   example: When having about 80 units on each team onscreen, and you select
+   somewhere for a high % of those units to move, the game stops to
+   calculate the path(s) there. Make it use a co-routine or something.
+* Bugs
+** TODO Fix - Crash when the leader for the group dies
+   How is the leader determined? And (how) is it displayed to the player?
+** TODO Fix - Mouse-cursor cannot be hidden, so one can't use the cool cursor instead
+** TODO Fix - Crash when units run off the grid
+   You will have to order them to do something though, otherwise it
+   doesn't crash..
+** TODO Fix - Crash when clicking outside the grid
+* Graphics refactoring
+  Requirements:
+** TODO Draw on pieces that are sorted/grouped together
+*** TODO Composite things as standard feature, which rotate together, move, stretch?
+    e.g. glows, caps at the end of laser
+*** TODO Children must also be reached over its name
+** TODO Things in the engine have equivalent (entity) in the game
+   think about it (it's brilliant)
