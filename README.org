@@ -1,27 +1,49 @@
 #+STARTUP: showeverything
 * About Perfectstorm
-  "Perfectstorm is a real time strategy game study written in common lisp
+#+BEGIN_QUOTE
+  Perfectstorm is a real time strategy game study written in common lisp
   using OpenGL for graphics display and cairo for texture generation. It
   is in active development with many of the basic features still
   unimplemented, but i decided the effort put into it justifies some
-  public documentation." - Cupe
+  public documentation. -- Cupe
+#+END_QUOTE
 * Status
-  As of now, it compiles and runs with sbcl and ccl (complete with bugs and
-  all kinds of yummy things) but not clisp (yet).
+  As of now, it compiles and runs with sbcl and ccl, complete with bugs and
+  all kinds of yummy things, but not clisp.
 
   This doesn't mean it's even near completion though. As said, there
   are still bugs and crashes to take care of. There are also lots of
   features and things to be completed before we can get close to that
   end.
-* Running it
-  Add it to "path/to/quicklisp/local-projects/" so that you can load it
-  into quicklisp with a simple:
+* Running it the quicklisp way
+  Clone perfectstorm into "path/to/quicklisp/local-projects/".
 
-  `(ql:quickload 'perfectstorm)´
+  Add these paths to the end of your system-index.txt which should look similar to this after you are done:
+#+BEGIN_SRC
 
-  Then start the game with
-
-  `(storm:storm)´
-
-  Done, your running the game.
-* More to be added
+  perfectstorm/vektor.asd
+  perfectstorm/toolbox.asd
+  perfectstorm/perfectstorm.asd
+#+END_SRC
+  Run this from the REPL:
+#+BEGIN_SRC lisp
+(ql:quickload 'perfectstorm)
+;;Then start the game:
+(storm:storm)
+#+END_SRC
+  Done, now the game *should* be running.
+* Running it the asdf way
+  Clone perfectstorm to one of these locations:
+#+BEGIN_SRC shell
+"~/common-lisp/"
+#+END_SRC
+  or
+#+BEGIN_SRC shell
+  "~/.local/share/common-lisp/source/"
+#+END_SRC
+then load the project like so:
+#+BEGIN_SRC lisp
+(asdf:load-system 'perfectstorm)
+;;Then start the game:
+(storm:storm)
+#+END_SRC
