@@ -7,6 +7,7 @@
   unimplemented, but i decided the effort put into it justifies some
   public documentation. -- Cupe
 #+END_QUOTE
+[[http://erleuchtet.org/with-health-bars.png]]
 * Status
   As of now, it compiles and runs with sbcl and ccl, complete with bugs and
   all kinds of yummy things, but not clisp.
